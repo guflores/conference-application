@@ -4,6 +4,9 @@ pipeline {
     tools {
         maven "maven 3.6"
     }
+     environment {
+        NEXUS_ARTIFACT_VERSION= "${env.BUILD_NUMBER}"
+    }
     options {
         parallelsAlwaysFailFast()
     }
@@ -34,6 +37,14 @@ pipeline {
                             }
                          }
                     }
+            }
+        }
+        stage('Publish in Nexus') {
+            steps {
+                nexusPublisher nexusInstanceId: 'Nexus',
+                nexusRepositoryId: 'releases',
+                packages: [[$class: 'MavenPackage',
+                mavenAssetList: [[classifier: '', extension: '', filePath: 'target/conference-app.war']], mavenCoordinate: [artifactId: 'conference-app', groupId: 'org.springframework.samples', packaging: 'war', version: NEXUS_ARTIFACT_VERSION]]]
             }
         }
     }
