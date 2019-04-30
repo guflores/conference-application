@@ -44,7 +44,7 @@ pipeline {
                 nexusPublisher nexusInstanceId: 'Nexus',
                 nexusRepositoryId: 'releases',
                 packages: [[$class: 'MavenPackage',
-                mavenAssetList: [[classifier: '', extension: '', filePath: 'target/conference-app.war']], mavenCoordinate: [artifactId: 'conference-app', groupId: 'org.springframework.samples', packaging: 'war', version: NEXUS_ARTIFACT_VERSION]]]
+                mavenAssetList: [[classifier: '', extension: '', filePath: 'target/conference-app.war']], mavenCoordinate: [artifactId: 'conference-app', groupId: 'de.codecentric', packaging: 'war', version: NEXUS_ARTIFACT_VERSION]]]
             }
         }
     }
